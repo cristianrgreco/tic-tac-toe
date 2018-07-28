@@ -1,35 +1,43 @@
 const readline = require("readline");
 const Board = require("./Board");
-
-const players = ["x", "o"];
+const players = require("./players");
 
 const prompt = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-async function startGame(board = new Board(), moveCount = 0) {
+async function startGameLoop(board = new Board(), moveCount = 0) {
   if (board.isOver()) {
-    const winningPlayer = board.getWinningPlayer();
-    console.log(`\nPlayer '${winningPlayer}' is victorious!\n`);
+    console.log(getWinnerText(board));
     prompt.close();
     return;
   }
 
-  const renderedBoard = board.toString();
-  console.log(`\n${renderedBoard}\n`);
+  console.log(`\n${board.toString()}\n`);
 
-  const player = players[moveCount % players.length];
+  const player = getPlayer(players, moveCount);
+  const position = await getNextPosition(player);
 
-  const position = await new Promise(resolve =>
+  const nextBoard = board.set(position, player);
+  return startGameLoop(nextBoard, moveCount + 1);
+}
+
+function getWinnerText(board) {
+  const winningPlayer = board.getWinningPlayer();
+  return `\nPlayer '${winningPlayer}' is victorious!\n`;
+}
+
+function getPlayer(players, moveCount) {
+  return players[moveCount % players.length];
+}
+
+function getNextPosition(player) {
+  return new Promise(resolve =>
     prompt.question(`Player '${player}'; enter your choice: `, ([row, col]) =>
       resolve({ row, col })
     )
   );
-
-  const nextBoard = board.set(position, player);
-
-  return startGame(nextBoard, moveCount + 1);
 }
 
-startGame();
+startGameLoop();
