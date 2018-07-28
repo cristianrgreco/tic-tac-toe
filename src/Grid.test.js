@@ -1,4 +1,4 @@
-const { Grid } = require("./grid");
+const { Grid } = require("./Grid");
 
 describe("Grid", () => {
   it("should render", () => {
