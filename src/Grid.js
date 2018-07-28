@@ -1,12 +1,11 @@
+const SIZE = 3;
 const EMPTY = " ";
 
 class Grid {
   constructor() {
-    this._grid = [
-      [EMPTY, EMPTY, EMPTY],
-      [EMPTY, EMPTY, EMPTY],
-      [EMPTY, EMPTY, EMPTY]
-    ];
+    this._grid = new Array(SIZE)
+      .fill(EMPTY)
+      .map(() => new Array(SIZE).fill(EMPTY));
   }
 
   set(position, value) {
@@ -30,7 +29,7 @@ class Grid {
   }
 
   toString() {
-    const horizontalBorder = "-".repeat(13);
+    const horizontalBorder = "-".repeat(SIZE * 4 + 1);
     const borderRow = row => `| ${row.join(" | ")} |`;
     const cells = this._grid.map(borderRow).join(`\n${horizontalBorder}\n`);
     return `${horizontalBorder}\n${cells}\n${horizontalBorder}`;
