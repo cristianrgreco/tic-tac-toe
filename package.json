@@ -1,0 +1,24 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src",
+    "test": "jest",
+    "format": "prettier --write 'src/**/*.{js,json}'",
+    "precommit": "npm run format; npm test"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "jest": "^23.4.1",
+    "prettier": "^1.13.7"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "<rootDir>/scripts/jest/setup.js"
+  }
+}
