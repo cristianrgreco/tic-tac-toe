@@ -2,6 +2,23 @@ const { Grid } = require("./Grid");
 const Board = require("./Board");
 
 describe("Board", () => {
+  it("should assign a value to a cell", () => {
+    const board = new Board()
+      .set({ row: 0, col: 0 }, "x")
+      .set({ row: 1, col: 1 }, "o")
+      .set({ row: 2, col: 2 }, "x");
+
+    expect(board).toEqualGrid(`
+      -------------
+      | x |   |   |
+      -------------
+      |   | o |   |
+      -------------
+      |   |   | x |
+      -------------
+    `);
+  });
+
   it("should return false if the game is not over", () => {
     const grid = new Grid()
       .set({ row: 0, col: 0 }, "x")

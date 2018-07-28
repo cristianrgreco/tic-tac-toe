@@ -19,7 +19,7 @@ async function startGame(board = new Board(), moveCount = 0) {
   const renderedBoard = board.toString();
   console.log(`\n${renderedBoard}\n`);
 
-  const player = moveCount % players.length === 0 ? players[0] : players[1];
+  const player = players[moveCount % players.length];
 
   const position = await new Promise(resolve =>
     prompt.question(`Player '${player}'; enter your choice: `, ([row, col]) =>

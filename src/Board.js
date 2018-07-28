@@ -14,7 +14,7 @@ class Board {
   }
 
   set(position, value) {
-    this._grid.set(position, value);
+    this._grid = this._grid.set(position, value);
     return this;
   }
 
